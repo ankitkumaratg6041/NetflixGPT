@@ -1,12 +1,47 @@
-# React + Vite
+# Creating our NetflixGPT Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+1. npm create vite@latest NetflixGPT
+2. npm install (to initialize our project)
+3. npm run dev (to run our project)
+   **Now installing tailwindcss to our project**
+4. npm install tailwindcss @tailwindcss/vite
+5. configuring vite.config.js file
 
-Currently, two official plugins are available:
+   ```jsx
+   import { defineConfig } from "vite";
+   import react from "@vitejs/plugin-react";
+   import tailwindcss from "@tailwindcss/vite";
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+   // https://vite.dev/config/
+   export default defineConfig({
+     plugins: [react(), tailwindcss()],
+   });
+   ```
 
-## Expanding the ESLint configuration
+6. Add an @import to your CSS file that imports Tailwind CSS.
+   ```css
+   @import "tailwindcss";
+   ```
+7. Start using Tailwind in your HTML. Make sure your compiled CSS is included in the <head>
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+   ```html
+   <!DOCTYPE html>
+   <html lang="en">
+     <head>
+       <meta charset="UTF-8" />
+       <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+       <link rel="stylesheet" href="/src/index.css" />
+       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+       <title>Vite + React</title>
+     </head>
+     <body>
+       <div id="root"></div>
+       <script type="module" src="/src/main.jsx"></script>
+     </body>
+   </html>
+   ```
+8. Now setting up routing to be able to switch to all our pages 
+    So for this we will use react-router-dom
+    ```sh
+    npm install -d react-router-dom
+    ```
