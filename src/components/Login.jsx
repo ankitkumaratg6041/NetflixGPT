@@ -1,7 +1,21 @@
-import React, {useState} from 'react'
+import React, {useState, useRef} from 'react'
+import { checkValidData } from '../utils/validate';
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true)
+  const [errorMessage, setErrorMessage] = useState(null)
+
+  const email = useRef(null);
+  const password = useRef(null);
+
+  const handleSubmit = () => {
+    // Validate the email and password
+    const message = checkValidData(email.current.value, password.current.value);
+    setErrorMessage(message);
+
+    // Proceed with the sign in or sign up process if validation is successful
+    
+  }
 
   const toggleSignInForm = () => { 
     // This function should toggle between the sign in form and the sign up form
@@ -18,12 +32,13 @@ const Login = () => {
       </div>
 
       {/* Sign in Form */}
-      <form className='w-3/12 absolute p-12 bg-black/80 my-40 mx-auto right-8 left-8 text-white rounded-lg flex flex-col items-center'>
+      <form onSubmit={(e) => e.preventDefault()} className='w-3/12 absolute p-12 bg-black/80 my-40 mx-auto right-8 left-8 text-white rounded-lg flex flex-col items-center'>
         <h1 className='font-bold text-3xl py-4'>{isSignInForm ? "Sign In" : "Sign Up"}</h1>
         {isSignInForm ? null : <input className="p-4 m-4 w-full dark:bg-gray-900 rounded" type="text" placeholder='Name'/>}
-        <input className="p-4 m-4 w-full dark:bg-gray-900 rounded" type="text" placeholder='Email address'/>
-        <input className="p-4 m-4 w-full dark:bg-gray-900 rounded" type="password" placeholder='Password'/>
-        <button className='p-4 m-6 w-full bg-red-700 rounded cursor-pointer'>{isSignInForm ? "Sign In" : "Sign Up"}</button>
+        <input ref={email} className="p-4 m-4 w-full dark:bg-gray-900 rounded" type="text" placeholder='Email address'/>
+        <input ref={password} className="p-4 m-4 w-full dark:bg-gray-900 rounded" type="password" placeholder='Password' />
+        {errorMessage && <p className='text-red-500'>{errorMessage}</p>}
+        <button className='p-4 m-6 w-full bg-red-700 rounded cursor-pointer' onClick={handleSubmit}>{isSignInForm ? "Sign In" : "Sign Up"}</button>
         <p className='cursor-pointer' onClick={toggleSignInForm}>{isSignInForm ? "New to Netflix? Sign Up Now" : "Already a user? Sign In Now"}</p>
         </form>
     </div>
