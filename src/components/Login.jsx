@@ -2,13 +2,12 @@ import React, {useState, useRef} from 'react'
 import { checkValidData } from '../utils/validate';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from '../utils/firebase';
-import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/userSlice';
 import Header from './Header';
+import { BACKGROUND_IMAGE_URL, PHOTO_URL } from '../utils/constants';
 
 const Login = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch(); // This is to dispatch actions to the Redux store
   const [isSignInForm, setIsSignInForm] = useState(true)
   const [errorMessage, setErrorMessage] = useState(null)
@@ -33,7 +32,7 @@ const Login = () => {
             // Here you can also set the display name
             updateProfile(user, {
               displayName: name.current.value,
-              photoURL: "https://lh3.googleusercontent.com/ogw/AF2bZygXd8C24vbyg-HfeIEkEZEKjrFlbPDsBepMhQ98lCW6fXw=s32-c-mo"
+              photoURL: PHOTO_URL
             }).then(() => {
               // Profile updated!
               const {uid, email, displayName, photoURL} = auth.currentUser
@@ -43,7 +42,6 @@ const Login = () => {
                 displayName: displayName,
                 photoURL: photoURL
               }))
-              navigate("/browse"); // Redirect to the browse page after sign up
             }).catch((error) => {
               // An error occurred
               setErrorMessage(error.code, "-", error.message);
@@ -60,7 +58,6 @@ const Login = () => {
         // Signed in 
         const user = userCredential.user;
         console.log("Logged in: ", user)
-        navigate("/browse"); // Redirect to the browse page after sign in
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -81,7 +78,7 @@ const Login = () => {
     <div>
       <Header />
       <div className='absolute'>
-        <img src="https://assets.nflxext.com/ffe/siteui/vlv3/42a0bce6-fc59-4c1c-b335-7196a59ae9ab/web_tall_panel/CA-en-20250303-TRIFECTA-perspective_0b9144c0-5e9d-47f4-b388-9e147be89ba5_large.jpg" alt="background" />
+        <img src={BACKGROUND_IMAGE_URL} alt="background" />
         
       </div>
 
