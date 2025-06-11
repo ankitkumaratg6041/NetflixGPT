@@ -17,7 +17,7 @@ const Login = () => {
   const password = useRef(null);
 
   const handleSubmit = () => {
-    console.log(`auth: ${auth}`);
+    // console.log(`auth: ${auth}`);
     // Validate the email and password
     const message = checkValidData(email.current.value, password.current.value);
     setErrorMessage(message);
@@ -57,7 +57,7 @@ const Login = () => {
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
-        console.log("Logged in: ", user)
+        // console.log("Logged in: ", user)
       })
       .catch((error) => {
         const errorCode = error.code;
