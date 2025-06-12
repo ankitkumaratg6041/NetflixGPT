@@ -9,7 +9,7 @@ export default function VideoBackground({ movieId }) {
   useMovieTrailor(movieId);
   return (
     <div className="w-screen">
-      <iframe className="w-screen aspect-video" src={`https://www.youtube.com/embed/fbddYji1F8s?si=cGwsA0EsT35IPKGT${trailerVideo?.key}?&autoplay=1&mute=1`} title="YouTube video player" allow="autoplay"></iframe>
+      <iframe className="w-screen aspect-video" src={`https://www.youtube.com/embed/fbddYji1F8s?si=cGwsA0EsT35IPKGT${trailerVideo?.key}?&autoplay=1&mute=1&loop=1&playlist=${trailerVideo?.key}`} title="YouTube video player" allow="autoplay"></iframe>
     </div>
   )
 }

@@ -51,22 +51,22 @@ const Header = () => {
   return (
       <div className='absolute w-screen px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between items-center'>
         <img className='w-25' src={LOGO_URL} alt="logo" />
-        
-      {user &&
-        (<div className='flex items-center'>
-          <img
-            className='w-8 h-8 rounded-md hover:cursor-pointer hover:scale-110 transition duration-300'
-            alt="usericon"
-            src={user?.photoURL}
-          />
-          <p className='ml-2 text-white font-semibold'>{user?.displayName}</p>
-          <button
-            onClick={handleSignOut}
-            className='ml-4 px-2 py-1 bg-red-600 text-white rounded-md hover:bg-red-700 transition duration-300 cursor-pointer'>
-            {"Sign Out"}
-          </button>
-        </div>)
-      }
+        {
+          user &&
+            (<div className='flex items-center'>
+              <img
+                className='w-8 h-8 rounded-md hover:cursor-pointer hover:scale-110 transition duration-300'
+                alt="usericon"
+                src={user?.photoURL}
+              />
+              <p className='ml-2 text-white font-semibold'>{user?.displayName}</p>
+              <button
+                onClick={handleSignOut}
+                className='ml-4 px-2 py-1 bg-red-600 text-white rounded-md hover:bg-red-700 transition duration-300 cursor-pointer'>
+                {"Sign Out"}
+              </button>
+            </div>)
+        }
       </div>
   )
 }
