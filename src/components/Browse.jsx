@@ -5,10 +5,11 @@ import SecondaryContainer from './SecondaryContainer'
 import useTrendingMovies from '../hooks/useTrendingMovies'
 import usePopularMovies from '../hooks/usePopularMovies'
 import useUpcomingMovies from '../hooks/useUpcomingMovies'
+import GptSearch from './GptSearch'
+import { useSelector } from 'react-redux'
 
 const Browse = () => {
-  // Custom hook to fetch now playing movies, this will automatically fetch all movies
-  // when the component mounts and store them in the Redux store
+  const showGpt = useSelector(store => store.gpt.showGptSearch)
   useNowPlayingMovies()
   useTrendingMovies()
   usePopularMovies()
@@ -17,8 +18,15 @@ const Browse = () => {
   return (
     <div>
       <Header />
-      <MainContainer />
-      <SecondaryContainer />
+      {
+        showGpt ? (<GptSearch />) :
+        (
+          <>
+            <MainContainer />
+            <SecondaryContainer />
+          </>
+        )
+  }
     </div>
   )
 }

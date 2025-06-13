@@ -1,6 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
 import userReducer from './userSlice';
 import moviesReducer from './moviesSlice'; 
+import gptReducer from './gptSlice';
+import configReducer from './configSlice';
 /**
  * Creates a Redux store for the application.
  * This store can be used to manage the state of the application.
@@ -12,6 +14,8 @@ const appStore = configureStore({
     reducer: {
         user: userReducer,
         movies: moviesReducer,
+        gpt: gptReducer,
+        config: configReducer,
     }
 })
 

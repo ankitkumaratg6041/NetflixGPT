@@ -4,13 +4,16 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { addUser, removeUser } from '../utils/userSlice';
-import { LOGO_URL } from '../utils/constants';
+import { LOGO_URL, SUPPORTED_LANGUAGES } from '../utils/constants';
+import { toggleGptSearchView } from '../utils/gptSlice';
+import { changeLanguage } from '../utils/configSlice';
 
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch(); // This is to dispatch actions to the Redux store
   const user = useSelector(store => store.user);// Get the user data from the Redux store
   // console.log("USER: "+user)
+  const showGptSearch = useSelector(store => store.gpt.showGptSearch); // Get the gptSearch value from the Redux store
 
   const handleSignOut = () => { 
     signOut(auth).then(() => {
@@ -45,27 +48,53 @@ const Header = () => {
         }
     });
     return () => unsubscribe(); // Cleanup the subscription on component unmount
-}, [])
+  }, [])
+  
+  const handleGptSearchClick = () => { 
+    dispatch(toggleGptSearchView()) // Toggle the gptSearch view
+  }
 
+  const handleLanguageChange = (e) => { 
+    const selectedLanguage = e.target.value;
+    dispatch(changeLanguage(selectedLanguage)); // Dispatch the selected language to the Redux store
+  }
 
+  // console.log(`gptvalue: ${showGptSearch}`)
   return (
       <div className='absolute w-screen px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between items-center'>
         <img className='w-25' src={LOGO_URL} alt="logo" />
         {
           user &&
-            (<div className='flex items-center'>
-              <img
+        (<div className='flex items-center'>
+          {
+            showGptSearch && <select onChange={handleLanguageChange} name="language" className='mr-4 p-1 rounded-md bg-gray-900 text-white outline-none cursor-pointer'>
+            {
+                SUPPORTED_LANGUAGES.map((language) => 
+                  <option key={language.identifier} value={language.identifier}>
+                    {language.name}
+                  </option>
+                )
+            }
+            </select>
+          }
+
+            <button
+              onClick={handleGptSearchClick}
+              className='py-1 px-2 mr-4 bg-green-600 rounded-lg text-white cursor-pointer hover:opacity-70'>
+              {showGptSearch ? "Homepage" : "Ask AI ✨"}
+            </button>
+            <img
                 className='w-8 h-8 rounded-md hover:cursor-pointer hover:scale-110 transition duration-300'
                 alt="usericon"
                 src={user?.photoURL}
-              />
-              <p className='ml-2 text-white font-semibold'>{user?.displayName}</p>
-              <button
-                onClick={handleSignOut}
-                className='ml-4 px-2 py-1 bg-red-600 text-white rounded-md hover:bg-red-700 transition duration-300 cursor-pointer'>
-                {"Sign Out"}
-              </button>
-            </div>)
+            />
+            <p className='ml-2 text-white font-semibold'>{user?.displayName}</p>
+            <button
+              onClick={handleSignOut}
+              className='ml-4 px-2 py-1 bg-red-600 text-white rounded-md hover:bg-red-700 transition duration-300 cursor-pointer'>
+              {"Sign Out"}
+            </button>
+          </div>)
         }
       </div>
   )

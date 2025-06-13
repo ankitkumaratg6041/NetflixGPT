@@ -79,7 +79,6 @@ const Login = () => {
       <Header />
       <div className='absolute'>
         <img src={BACKGROUND_IMAGE_URL} alt="background" />
-        
       </div>
 
       {/* Sign in Form */}
