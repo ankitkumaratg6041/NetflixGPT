@@ -6,11 +6,18 @@ export const API_OPTIONS = {
   method: 'GET',
   headers: {
     accept: 'application/json',
-    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkNGNiNDNjNjY4NDU2ZTIyNjRmODYxOGI4ZWUzODgzZCIsIm5iZiI6MTY5MDEzMjk4Ny43MjEsInN1YiI6IjY0YmQ2MWZiYjg2NWViMDEzOTljYjliZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.p6M3ZIHwjpuD1NQmpLXANd0SEhhpaWaTHZ6b2F3tVsw'
+    Authorization: 'Bearer ' + (import.meta.env.VITE_TMDB_KEY || ''),
   }
 };
 
 export const IMG_CDN_URL = "https://image.tmdb.org/t/p/w200";
+
+export const MOVIE_GENRES = [
+  { id:1, name:"Now Playing", slug: "nowPlayingMovies" },
+  { id: 2, name: "Trending", slug: "trendingMovies" },
+  { id: 3, name: "Popular", slug: "popularMovies" },
+  { id: 4, name: "Upcoming", slug: "upcomingMovies" },
+]
 
 export const SUPPORTED_LANGUAGES = [
   {identifier: 'en', name: 'English'},
@@ -20,3 +27,6 @@ export const SUPPORTED_LANGUAGES = [
   {identifier: 'es', name: 'Spanish'},
   {identifier: 'rs', name: 'Russian'}
 ]
+
+// OpenAI
+export const OPENAI_KEY = import.meta.env.VITE_OPENAI_KEY;

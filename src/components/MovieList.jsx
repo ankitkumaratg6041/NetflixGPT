@@ -1,6 +1,6 @@
 import MovieCard from "./MovieCard"
 
-function MovieList({ title, movies }) {
+function MovieList({ title, movies, onMovieClick }) {
     // console.log(movies)
   return (
     <div className="px-6">
@@ -9,7 +9,7 @@ function MovieList({ title, movies }) {
             <div className="flex">
                 {
                     movies?.map((movie) => (
-                        <MovieCard posterPath={movie.poster_path} key={movie.id} />
+                        <MovieCard posterPath={movie.poster_path} key={movie.id} onClick={() => onMovieClick(movie)} />
                     ))
                 }
             </div>

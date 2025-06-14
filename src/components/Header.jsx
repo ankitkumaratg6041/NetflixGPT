@@ -61,7 +61,7 @@ const Header = () => {
 
   // console.log(`gptvalue: ${showGptSearch}`)
   return (
-      <div className='absolute w-screen px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between items-center'>
+      <div className='absolute w-screen px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between items-center' style={{right: 0}}>
         <img className='w-25' src={LOGO_URL} alt="logo" />
         {
           user &&

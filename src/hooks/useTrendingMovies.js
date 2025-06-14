@@ -1,10 +1,14 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { API_OPTIONS } from "../utils/constants";
 import { addTrendingMovies } from "../utils/moviesSlice";
 import { useEffect } from "react";
 
 const useTrendingMovies = () => { 
     const dispatch = useDispatch(); // This is to dispatch actions to the Redux store
+
+    // MEMOIZATION: Using useSelector to get the infoVideo from the Redux store
+    // This is to avoid unnecessary re-renders and to access the latest state
+    const trendingMovies = useSelector((state) => state.movies.trendingMovies);
 
     const getTrendingMovies = async () => {
         const data = await fetch('https://api.themoviedb.org/3/movie/top_rated?page=1', API_OPTIONS)
@@ -13,8 +17,8 @@ const useTrendingMovies = () => {
     }
 
     useEffect(() => { 
-        getTrendingMovies();
-
+        // Memoization: Only fetch trending movies if they are not already in the store
+        !trendingMovies && getTrendingMovies();
     }, [])
 }
 
