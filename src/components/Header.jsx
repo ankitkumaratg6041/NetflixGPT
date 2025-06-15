@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { addUser, removeUser } from '../utils/userSlice';
 import { LOGO_URL, SUPPORTED_LANGUAGES } from '../utils/constants';
-import { toggleGptSearchView } from '../utils/gptSlice';
+import { showHomePage, toggleGptSearchView } from '../utils/gptSlice';
 import { changeLanguage } from '../utils/configSlice';
 
 const Header = () => {
@@ -61,11 +61,14 @@ const Header = () => {
 
   // console.log(`gptvalue: ${showGptSearch}`)
   return (
-      <div className='absolute w-screen px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between items-center' style={{right: 0}}>
-        <img className='w-25' src={LOGO_URL} alt="logo" />
+    <div
+      className='absolute w-screen px-8 py-2 bg-gradient-to-b from-black z-10 flex flex-col md:flex-row justify-between items-center '
+      style={{ right: 0 }}
+    >
+        <img className='w-25 md:mx-0 mx-auto' src={LOGO_URL} alt="logo" onClick={() => dispatch(showHomePage())}/>
         {
           user &&
-        (<div className='flex items-center'>
+        (<div className='flex items-center mt-2 md:mt-0'>
           {
             showGptSearch && <select onChange={handleLanguageChange} name="language" className='mr-4 p-1 rounded-md bg-gray-900 text-white outline-none cursor-pointer'>
             {
@@ -84,14 +87,14 @@ const Header = () => {
               {showGptSearch ? "Homepage" : "Ask AI ✨"}
             </button>
             <img
-                className='w-8 h-8 rounded-md hover:cursor-pointer hover:scale-110 transition duration-300'
+                className='w-8 h-8 hidden md:block rounded-md hover:cursor-pointer hover:scale-110 transition duration-300'
                 alt="usericon"
                 src={user?.photoURL}
             />
-            <p className='ml-2 text-white font-semibold'>{user?.displayName}</p>
+            <p className='ml-2 text-white font-semibold hidden md:block'>{user?.displayName}</p>
             <button
               onClick={handleSignOut}
-              className='ml-4 px-2 py-1 bg-red-600 text-white rounded-md hover:bg-red-700 transition duration-300 cursor-pointer'>
+              className='ml-4 px-2 py-1 sm:text-sm bg-red-600 text-white rounded-md hover:bg-red-700 transition duration-300 cursor-pointer'>
               {"Sign Out"}
             </button>
           </div>)

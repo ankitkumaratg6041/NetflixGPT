@@ -40,7 +40,8 @@ export default function SecondaryContainer() {
             <h3 className="text-3xl p-2 font-bold">{homePageMovieInfo?.name}</h3>
           </div>
         }
-        <div className='-mt-60 pl-10 relative z-20'>
+
+        <div className='mt-0 md:-mt-60 pl-4 md:pl-10 relative z-20'>
           {
             MOVIE_GENRES.map((genre) => 
               <MovieList 
@@ -51,10 +52,6 @@ export default function SecondaryContainer() {
               />
             )
           }
-          {/* <MovieList title={"Now Playing"} movies={movies.nowPlayingMovies}/>
-          <MovieList title={"Trending"} movies={movies.trendingMovies} />
-          <MovieList title={"Popular"} movies={movies.popularMovies} />
-          <MovieList title={"Upcoming"} movies={movies.upcomingMovies} /> */}
         </div>
       </div>
     )

@@ -1,14 +1,10 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addHomePageMovieInfo } from "../utils/moviesSlice";
 import { useEffect } from "react";
 import { API_OPTIONS } from "../utils/constants";
 
 const useInfoVideo = (movieId) => {
     const dispatch = useDispatch(); // This is to dispatch actions to the Redux store
-
-    // MEMOIZATION: Using useSelector to get the homePageMovieInfo from the Redux store
-    // This is to avoid unnecessary re-renders and to access the latest state
-    const homePageMovieInfo = useSelector((state) => state.movies.homePageMovieInfo);
 
     // Fetching movie videos from the API and updating the Redux store
     const getMovieVideos = async () => { 
@@ -32,9 +28,7 @@ const useInfoVideo = (movieId) => {
     useEffect(() => { 
         // If movieId is not provided, do not fetch
         if (!movieId) return;
-        
-        // Memoization: Only fetch homePageMovieInfo if it is not already in the store
-        !homePageMovieInfo && getMovieVideos(movieId);
+        getMovieVideos(movieId);
     }, [movieId]); // Dependency array to re-run the effect when movieId changes
 }
 

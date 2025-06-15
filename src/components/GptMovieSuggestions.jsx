@@ -35,8 +35,8 @@ const GptMovieSuggestions = () => {
       {gpt &&
         <div className=" bg-black text-white background-opacity-10 opacity-90">
           {movieId &&
-            <div ref={videoRef} className="fixed w-200 top-1/8 left-1/4 z-10 bg-black text-white rounded-lg flex flex-col align-center ">
-              <iframe className="w-200 aspect-video rounded-lg" src={`https://www.youtube.com/embed/${infoVideo?.key}?si=uDMt6FVgugOgv54B&autoplay=1&mute=1`} title="YouTube video player"></iframe>
+            <div ref={videoRef} className="fixed w-80 md:w-200 top-1/2 md:top-1/8 md:left-1/4 z-10 bg-black text-white rounded-lg flex flex-col align-center ">
+              <iframe className="w-80 md:w-200 aspect-video rounded-lg" src={`https://www.youtube.com/embed/${infoVideo?.key}?si=uDMt6FVgugOgv54B&autoplay=1&mute=1`} title="YouTube video player"></iframe>
               <h3 className="text-3xl p-2 font-bold">{infoVideo?.name}</h3>
             </div>
           }

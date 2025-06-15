@@ -15,9 +15,12 @@ const gptSlice = createSlice({
             const { movieNames, movieResults } = action.payload;
             state.movieNames = movieNames; // Update the GPT movie search results
             state.movieResults = movieResults; // Update the TMDB movie search results
+        },
+        showHomePage: (state) => { 
+            state.showGptSearch = false; // Hide the GPT search view
         }
     }
 })
 
-export const { toggleGptSearchView, addGptMovieResult } = gptSlice.actions;
+export const { toggleGptSearchView, addGptMovieResult, showHomePage } = gptSlice.actions;
 export default gptSlice.reducer;

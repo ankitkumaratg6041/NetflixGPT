@@ -1,14 +1,10 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addInfoVideo } from "../utils/moviesSlice";
 import { useEffect } from "react";
 import { API_OPTIONS } from "../utils/constants";
 
 const useInfoVideo = (movieId) => {
     const dispatch = useDispatch(); // This is to dispatch actions to the Redux store
-
-    // MEMOIZATION: Using useSelector to get the infoVideo from the Redux store
-    // This is to avoid unnecessary re-renders and to access the latest state
-    const infoVideo = useSelector((state) => state.movies.infoVideo);
 
     // Fetching movie videos from the API and updating the Redux store
     const getMovieVideos = async () => { 
@@ -31,9 +27,7 @@ const useInfoVideo = (movieId) => {
     // Call the function to fetch movie videos
     useEffect(() => { 
         if (!movieId) return; // If movieId is not provided, do not fetch
-
-        // Memoization: Only fetch info videos if they are not already in the store
-        !infoVideo && getMovieVideos(movieId);
+        getMovieVideos(movieId);
     }, [movieId]); // Dependency array to re-run the effect when movieId changes
 }
 
