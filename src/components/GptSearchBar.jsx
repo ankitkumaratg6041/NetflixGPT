@@ -53,7 +53,7 @@ const GptSearchBar = () => {
         })
 
         const tmdbDetails = await Promise.all(promiseArray)
-        console.log("TMDB Details:", tmdbDetails);
+        // console.log("TMDB Details:", tmdbDetails);
         // Here you can dispatch the tmdbDetails to the Redux store
         dispatch(addGptMovieResult({movieNames: gptMovies, movieResults: tmdbDetails}));
         // console.log("Stored GPT movies in Redux store:", tmdbMoviesStore);
